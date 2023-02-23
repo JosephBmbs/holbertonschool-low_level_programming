@@ -1,10 +1,8 @@
 #include <stdio.h>
 
 /**
-* main – prints the size of various types
-#
-* Description: using the main function
-* this program prints "Programming is like building a multilingual puzzle
+* main – prints the size of various types on the computer
+*
 * Return: always 0
 */
 
