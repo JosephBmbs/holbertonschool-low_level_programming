@@ -2,7 +2,9 @@
 
 /**
 * main – prints the size of various types
-*
+#
+* Description: using the main function
+* this program prints "Programming is like building a multilingual puzzle
 * Return: always 0
 */
 
