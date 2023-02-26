@@ -9,7 +9,8 @@
 * Return: 0
 **/
 
-int main(void){
+int main(void)
+{
 	char NUM;
 
 	for (NUM = '0'; NUM <= '9'; NUM++)
