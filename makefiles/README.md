@@ -1,6 +1,1 @@
-Allowed editors: vi, vim, emacs
-OS: Ubuntu 20.04 LTS
-Version of gcc: 9.3.0
-Version of make: GNU Make 4.2.1
-All your files should end with a new line
-A README.md file, at the root of the folder of the project, is mandatory
+Makefile sets a set of rules to determine which parts of a program need to be recompile, and issues command to recompile them. Makefile is a way of automating software building procedure and other complex tasks with dependencies. Makefile contains: dependency rules, macros and suffix(or implicit) rules.
