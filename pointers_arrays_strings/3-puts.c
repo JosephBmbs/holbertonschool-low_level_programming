@@ -3,9 +3,9 @@
 /**
  * _puts - function that prints a string, followed by a new line, to stdout
  *
- * @str: string to print
+ * @str: declaration of *str and paramters for the function _puts
  */
-
+void _putchar();
 void _puts(char *str)
 {
 	int x;
