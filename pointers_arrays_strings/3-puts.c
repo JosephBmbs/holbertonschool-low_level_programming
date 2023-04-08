@@ -5,7 +5,7 @@
  *
  * @str: declaration of *str and paramters for the function _puts
  */
-void _putchar();
+void _putchar(void);
 void _puts(char *str)
 {
 	int x;
