@@ -3,16 +3,16 @@
 /**
  * _puts - function that prints a string, followed by a new line, to stdout
  *
- * @str: declaration of *str and paramters for the function _puts
+ * @str: string to print
  */
-
+void _putchar();
 void _puts(char *str)
 {
-	int i;
+	int x;
 
-	for (i = 0; *(str + i) != '\0'; i++)
+	for (x = 0; *(str + x) != '\0'; x++)
 	{
-		_putchar(*(str + i));
+		_putchar(*(str + x));
 	}
 	_putchar('\n');
 }
