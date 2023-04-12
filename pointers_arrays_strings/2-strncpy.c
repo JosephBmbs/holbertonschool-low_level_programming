@@ -2,11 +2,11 @@
 
 /**
  * _strncpy - a function that copies a string
- * 
+ *
  * @dest: copy destination
  * @src: source to copy
  * @n: amount of places to copy
- * 
+ *
  * Return: value of dest
  */
 
