@@ -9,7 +9,7 @@
  * @dest: copy distination
  * @src: src
  *
- * Return: value of char 
+ * Return: value of char
  */
 
 char *_strcpy(char *dest, char *src)
