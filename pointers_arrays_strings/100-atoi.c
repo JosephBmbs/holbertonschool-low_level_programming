@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _atoi -  a function that convert a string to an integer
+ * _atoi - function that convert a string to an integer
  * 
  * @s: pointer
  * Return: string converted to int.
@@ -9,8 +9,8 @@
 
 int _atoi(char *s)
 {
-	int i = 0, j, din;
-	int sign = 1, bdet = 0, wfet = 0, bdina = 0, out = 0;
+int i = 0, j, din;
+int sign = 1, bdet = 0, wfet = 0, bdina = 0, out = 0;
 
 	while (s[i] != '\0')
 	{
