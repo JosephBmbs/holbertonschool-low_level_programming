@@ -3,7 +3,7 @@
 #include "main.h"
 
 /**
- * string_nconcat - allocate new memory and concat two string
+ * string_nconcat - a function that concatenates two strings
  * @s1: 1st str
  * @s2: 2nd str
  * @n: Nummber oof char to concat with s1
