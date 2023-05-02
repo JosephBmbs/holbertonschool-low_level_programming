@@ -4,7 +4,8 @@
 #include "lists.h"
 
 /**
- * delete_dnodeint_at_index - deletes the node at a given index of a dlistint_t linked list
+ * delete_dnodeint_at_index - deletes the node at a
+ * given index of a dlistint_t linked list
  * @head: double pointer to the head of the list
  * @index: index of the node to delete
  *
@@ -21,11 +22,11 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 
 	if (index == 0)
 	{
-		*head = (*head)->next;
-		if (*head != NULL)
-    		(*head)->prev = NULL;
-		free(current);
-    	return (1);
+	*head = (*head)->next;
+	if (*head != NULL)
+	(*head)->prev = NULL;
+	free(current);
+	return (1);
 	}
 
 	while (i < index && current != NULL)
