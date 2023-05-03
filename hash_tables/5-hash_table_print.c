@@ -5,27 +5,33 @@
  * hash_table_delete - Deletes a hash table
  * @ht: The hash table to delete
  */
-void hash_table_delete(hash_table_t *ht)
+void hash_table_print(const hash_table_t *ht)
 {
+	hash_node_t *node;
 	unsigned long int i;
-	hash_node_t *node, *tmp;
+	unsigned char comma_flag = 0;
 
 	if (ht == NULL)
 		return;
 
+	printf("{");
 	for (i = 0; i < ht->size; i++)
 	{
-		node = ht->array[i];
-		while (node != NULL)
+		if (ht->array[i] != NULL)
 		{
-			tmp = node;
-			node = node->next;
-			free(tmp->key);
-			free(tmp->value);
-			free(tmp);
+			if (comma_flag == 1)
+				printf(", ");
+
+			node = ht->array[i];
+			while (node != NULL)
+			{
+				printf("'%s': '%s'", node->key, node->value);
+				node = node->next;
+				if (node != NULL)
+					printf(", ");
+			}
+			comma_flag = 1;
 		}
 	}
-
-	free(ht->array);
-	free(ht);
+	printf("}\n");
 }
