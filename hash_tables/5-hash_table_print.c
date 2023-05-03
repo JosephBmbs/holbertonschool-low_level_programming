@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /**
- * hash_table_delete - Deletes a hash table
+ * hash_table_print - Prints a hash table.
  * @ht: The hash table to delete
  */
 void hash_table_print(const hash_table_t *ht)
