@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define _POSIX_C_SOURCE 200809L
 
 /**
  * hash_table_set - adds or updates a key/value pair to
@@ -27,46 +26,43 @@
 
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-    if (ht == NULL || key == NULL || *key == '\0') {
-        return 0;
-    }
+	hash_node_t *new;
+	char *value_copy;
+	unsigned long int index, i;
 
-    unsigned long int index = key_index((const unsigned char *)key,
-	ht->size);
-    hash_node_t *node = ht->array[index];
+	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
+		return (0);
 
-    /* Check if the key already exists */
-    while (node != NULL) {
-        if (strcmp(node->key, key) == 0) {
-            free(node->value);
-            node->value = strdup(value);
-            if (node->value == NULL) {
-                return 0;
-            }
-            return 1;
-        }
-        node = node->next;
-    }
+	value_copy = strdup(value);
+	if (value_copy == NULL)
+		return (0);
 
-    /* new node born !!! XD */
-    hash_node_t *new_node = malloc(sizeof(hash_node_t));
-    if (new_node == NULL) {
-        return 0;
-    }
-    new_node->key = strdup(key);
-    new_node->value = strdup(value);
-    if (new_node->key == NULL || new_node->value == NULL) {
-        free(new_node->key);
-        free(new_node->value);
-        free(new_node);
-        return 0;
-    }
+	index = key_index((const unsigned char *)key, ht->size);
+	for (i = index; ht->array[i]; i++)
+	{
+		if (strcmp(ht->array[i]->key, key) == 0)
+		{
+			free(ht->array[i]->value);
+			ht->array[i]->value = value_copy;
+			return (1);
+		}
+	}
 
-    /* set the new node to the beginning of the list */
-    new_node->next = ht->array[index];
-    ht->array[index] = new_node;
+	new = malloc(sizeof(hash_node_t));
+	if (new == NULL)
+	{
+		free(value_copy);
+		return (0);
+	}
+	new->key = strdup(key);
+	if (new->key == NULL)
+	{
+		free(new);
+		return (0);
+	}
+	new->value = value_copy;
+	new->next = ht->array[index];
+	ht->array[index] = new;
 
-    return 1;
+	return (1);
 }
-
-
