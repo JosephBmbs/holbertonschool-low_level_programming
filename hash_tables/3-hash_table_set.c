@@ -1,6 +1,8 @@
 #include "hash_tables.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#define _POSIX_C_SOURCE 200809L
 
 /**
  * hash_table_set - adds or updates a key/value pair to
