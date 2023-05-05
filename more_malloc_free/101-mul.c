@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "main.h"
 /* malloc free */
 #include <stdlib.h>
 
