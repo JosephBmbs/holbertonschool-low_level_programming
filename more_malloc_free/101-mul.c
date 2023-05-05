@@ -1,114 +1,149 @@
-#include "main.h"
-#include <stdio.h>
-#include <string.h>
+#include "holberton.h"
+/* malloc free */
+#include <stdlib.h>
+
 
 /**
- * _isdigit - checks if character is digit
- * @c: the character to check
+ * initDigitArray - allocates and sets to 0 an array to contain the digits
+ *   of a base 10 number
  *
- * Return: 1 if digit, 0 otherwise
+ * @size: array size
+ * Return: pointer to initialized array, or NULL on failure
  */
-int _isdigit(int c)
+unsigned int *initDigitArray(size_t size)
 {
-	return (c >= '0' && c <= '9');
+	unsigned int *arr = NULL;
+	size_t i;
+
+	arr = malloc(sizeof(unsigned int) * size);
+	if (!arr)
+		return (NULL);
+
+	for (i = 0; i < size; i++)
+		arr[i] = 0;
+
+	return (arr);
 }
 
-/**
- * _strlen - returns the length of a string
- * @s: the string whose length to check
- *
- * Return: integer length of string
- */
-int _strlen(char *s)
-{
-	int i = 0;
-
-	while (*s++)
-		i++;
-	return (i);
-}
 
 /**
- * big_multiply - multiply two big number strings
- * @s1: the first big number string
- * @s2: the second big number string
+ * stringIntMultiply - TBD
  *
- * Return: the product big number string
+ * @prod_digits: array to store digits of product
+ * @n1_digits: string containing multiplicand digits in ASCII
+ * @n2_digits: string containing multiplier digits in ASCII
+ * @n1_len: amount of digits in multiplicand
+ * @n2_len: amount of digits in multiplier
  */
-char *big_multiply(char *s1, char *s2)
+void stringIntMultiply(unsigned int *prod_digits, char *n1_digits,
+		       char *n2_digits, size_t n1_len, size_t n2_len)
 {
-	char *r;
-	int l1, l2, a, b, c, x;
+	int i, j, sum;
+	unsigned char digit1, digit2;
 
-	l1 = _strlen(s1);
-	l2 = _strlen(s2);
-	r = malloc(a = x = l1 + l2);
-	if (!r)
-		printf("Error\n"), exit(98);
-	while (a--)
-		r[a] = 0;
+	if (prod_digits == NULL || n1_digits == NULL || n2_digits == NULL)
+		return;
 
-	for (l1--; l1 >= 0; l1--)
+	for (i = n1_len - 1; i >= 0; i--)
 	{
-		if (!_isdigit(s1[l1]))
+		sum = 0;
+		digit1 = n1_digits[i] - '0';
+
+		for (j = n2_len - 1; j >= 0; j--)
 		{
-			free(r);
-			printf("Error\n"), exit(98);
+			digit2 = n2_digits[j] - '0';
+
+			sum += prod_digits[i + j + 1] + (digit1 * digit2);
+
+			prod_digits[i + j + 1] = sum % 10;
+
+			sum /= 10;
 		}
-		a = s1[l1] - '0';
-		c = 0;
 
-		for (l2 = _strlen(s2) - 1; l2 >= 0; l2--)
-		{
-			if (!_isdigit(s2[l2]))
-			{
-				free(r);
-				printf("Error\n"), exit(98);
-			}
-			b = s2[l2] - '0';
-
-			c += r[l1 + l2 + 1] + (a * b);
-			r[l1 + l2 + 1] = c % 10;
-
-			c /= 10;
-		}
-		if (c)
-			r[l1 + l2 + 1] += c;
+		if (sum > 0)
+			prod_digits[i + j + 1] += sum;
 	}
-	return (r);
 }
 
 
 /**
- * main - multiply two big number strings
- * @argc: the number of arguments
- * @argv: the argument vector
+ * stringIsPosInt - validates if string represents a positive integer
  *
- * Return: Always 0 on success.
+ * @s: string to test
+ * Return: 1 if true, 0 if false
+ */
+int stringIsPosInt(char *s)
+{
+	size_t i;
+
+	for (i = 0; s[i]; i++)
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (0);
+	}
+
+	return (1);
+}
+
+
+/**
+ * error - error return
+ *
+ * @status: error code to exit with
+ */
+void error(int status)
+{
+	_putchar('E');
+	_putchar('r');
+	_putchar('r');
+	_putchar('o');
+	_putchar('r');
+	_putchar('\n');
+	exit(status);
+}
+
+
+/**
+ * main - entry point
+ *
+ * @argc: number of commmand line arguments
+ * @argv: array of commmand line arguments
+ * Return: 0 on success, 98 on failure
  */
 int main(int argc, char **argv)
 {
-	char *r;
-	int a, c, x;
+	size_t i, av1_len, av2_len, prod_len;
+	unsigned int *prod_digits = NULL;
 
-	if (argc != 3)
-		printf("Error\n"), exit(98);
+	if (argc != 3 || !stringIsPosInt(argv[1]) ||
+	    !stringIsPosInt(argv[2]))
+		error(98);
 
-	x = _strlen(argv[1]) + _strlen(argv[2]);
-	r = big_multiply(argv[1], argv[2]);
-	c = 0;
-	a = 0;
-	while (c < x)
-	{
-		if (r[c])
-			a = 1;
-		if (a)
-			_putchar(r[c] + '0');
-		c++;
-	}
-	if (!a)
+	for (i = 0, av1_len = 0; argv[1][i]; i++)
+		av1_len++;
+
+	for (i = 0, av2_len = 0; argv[2][i]; i++)
+		av2_len++;
+
+	prod_len = av1_len + av2_len;
+	prod_digits = initDigitArray(prod_len);
+	if (prod_digits == NULL)
+		error(98);
+
+	stringIntMultiply(prod_digits, argv[1], argv[2], av1_len, av2_len);
+
+	/* omit leading zeroes */
+	for (i = 0; !prod_digits[i] && i < prod_len; i++)
+	{}
+
+	if (i == prod_len)
 		_putchar('0');
+
+	for (; i < prod_len; i++)
+		_putchar(prod_digits[i] + '0');
 	_putchar('\n');
-	free(r);
+
+	free(prod_digits);
+
 	return (0);
 }
