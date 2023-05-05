@@ -1,6 +1,7 @@
 #include "main.h"
 /* malloc free */
 #include <stdlib.h>
+#include <stdio.h>
 
 
 /**
