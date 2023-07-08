@@ -3,13 +3,15 @@
 #include "search_algos.h"
 
 /**
- * binary_search - Searches for a value in a sorted array of integers using binary search.
+ * binary_search - Searches for a value in a sorted
+ * array of integers using binary search.
  *
  * @array: Pointer to the first element of the array to search in.
  * @size: Number of elements in the array.
  * @value: The value to search for.
  *
- * Return: The index where the value is located, or -1 if not found or array is NULL.
+ * Return: The index where the value is located, or -1 if
+ * not found or array is NULL.
  *
  * Description: Prints the array being searched every time it changes.
  */
