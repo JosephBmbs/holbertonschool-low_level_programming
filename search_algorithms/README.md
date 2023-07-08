@@ -1,8 +1,9 @@
-# Search Algorithms
 
-<div align="center">
+<div align ="center">
+  <h1>Search Algorithms</h1>
   <img src="https://assets.website-files.com/6141c89a3874c3702674a1c0/648adadf47b52f39352b4f04_types-of-graphs.png" alt="Search Algorithms">
 </div>
+
 
 This repository contains a collection of search algorithms implemented in the C programming language. The project aims to provide a better understanding of search algorithms and their applications. Each algorithm is implemented according to specific requirements and follows the Betty coding style.
 
